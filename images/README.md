@@ -1,4 +1,5 @@
 ## Images for my repository
-### Image:![Alt Txt](NicoleImage.jpg)
+### Image:
+<img src=NicoleImage.jpg width=150>
 
 
