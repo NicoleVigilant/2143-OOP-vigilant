@@ -1,4 +1,4 @@
 ## Images for my repository
-### Image:
+### Image:![Alt Txt](NicoleImage.jpg)
 
 
