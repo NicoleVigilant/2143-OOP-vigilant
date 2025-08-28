@@ -1,5 +1,5 @@
 ## Images for my repository
 ### Image:
-<img src=NicoleImage.jpg width=150>
+<img src=NicoleImage1.jpg width=150>
 
 
