@@ -26,10 +26,10 @@ int main(int argc, char* argv[]) {
     }
 
     // Create a color (RGBA)
-    SDL_Color gold = {255, 215, 0, 255};
+    SDL_Color white = {255, 255, 255, 255};
 
     // Create surface from text
-    SDL_Surface* surface = TTF_RenderText_Blended(font, "Hello SDL2!", gold);
+    SDL_Surface* surface = TTF_RenderText_Blended(font, "Hello SDL2!", white);
     if (!surface) {
         std::cerr << "Text render error: " << TTF_GetError() << std::endl;
         return 1;
@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
                 running = false;
         }
 
-        SDL_SetRenderDrawColor(renderer, 255, 182, 193, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
 
         SDL_RenderCopy(renderer, texture, nullptr, &dstRect);
