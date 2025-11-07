@@ -184,3 +184,8 @@ Students should:
 
 You’ve officially entered the SDL multiverse.
 Next: learn to load and parse a simple JSON file (`Program_01_JSON_Loader`) and start printing Game of Life patterns.
+
+---
+✅ **Student Note:** Program 00 successfully installed, compiled, and runs correctly.  
+Tested on Windows (MSYS2 MinGW64).
+
