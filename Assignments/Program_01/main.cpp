@@ -40,7 +40,7 @@ void print_shape(const Shape& shape) {
         int gx = c.x - min_x;
         int gy = c.y - min_y;
         if (gy >= 0 && gy < height && gx >= 0 && gx < width) {
-            grid[gy][gx] = 'X';
+            grid[gy][gx] = '#';
         }
     }
 
@@ -73,6 +73,8 @@ int main() {
     std::cout << "Available shapes:\n";
     for (auto it = shapes_data.begin(); it != shapes_data.end(); ++it)
         std::cout << " - " << it.key() << '\n';
+
+    std::cout << "\nTotal shapes loaded: " << shapes_data.size() << "\n";
 
     std::string choice;
     std::cout << "\nEnter shape name: ";
