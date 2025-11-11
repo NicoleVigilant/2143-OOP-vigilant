@@ -292,3 +292,17 @@ std::cout << "\nTotal shapes loaded: " << shapes_data.size() << "\n";
 # 🎯 Deliverables:
 
 Upload your `Program_01` folder into your `Assignments` folder for grading.
+
+# Program 01 — JSON Loader
+
+This program loads Game of Life patterns from a JSON file (`shapes.json`) using the nlohmann/json library.  
+It displays all available shapes, allows the user to choose one by name, and prints the pattern as an ASCII grid.
+
+## Features
+- Loads and parses JSON data
+- Prints all shape names
+- Displays total shapes loaded
+- Custom "dot" shape added
+- Custom display character: '#'
+
+✅ Program 01 successfully loads, counts, and displays all shapes (including my custom "dot").
