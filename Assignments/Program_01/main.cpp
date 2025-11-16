@@ -45,15 +45,11 @@ void print_shape(const Shape& shape) {
         }
     }
 
-    // Color setup (ANSI escape codes)
-    const std::string pink = "\033[35m";   // Magenta (pinkish color)
-    const std::string reset = "\033[0m";
-
     std::cout << "\n" << shape.name << " (" << shape.width << "x" << shape.height << ")\n";
 
-    // Print each row with color
+    // Use bold magenta color (pinkish) for the shape
     for (const auto& row : grid)
-        std::cout << pink << row << reset << '\n';
+        std::cout << BPURPLE << row << OFF << '\n';
 }
 
 int main() {
@@ -106,4 +102,3 @@ int main() {
     print_shape(shape);
     return 0;
 }
-
