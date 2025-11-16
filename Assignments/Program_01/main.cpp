@@ -40,13 +40,19 @@ void print_shape(const Shape& shape) {
         int gx = c.x - min_x;
         int gy = c.y - min_y;
         if (gy >= 0 && gy < height && gx >= 0 && gx < width) {
-            grid[gy][gx] = '#';
+            grid[gy][gx] = '#';  // custom display character
         }
     }
 
+    // Color setup (ANSI escape codes)
+    const std::string pink = "\033[35m";   // Magenta (pinkish color)
+    const std::string reset = "\033[0m";
+
     std::cout << "\n" << shape.name << " (" << shape.width << "x" << shape.height << ")\n";
+
+    // Print each row with color
     for (const auto& row : grid)
-        std::cout << row << '\n';
+        std::cout << pink << row << reset << '\n';
 }
 
 int main() {
@@ -99,3 +105,4 @@ int main() {
     print_shape(shape);
     return 0;
 }
+
