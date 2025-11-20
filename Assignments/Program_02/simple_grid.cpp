@@ -31,20 +31,9 @@ int main(int argc, char* argv[]) {
     }
     json data = json::parse(file);
 
-  // Pick one pattern (can be set via command line)
-string shapeName = "glider";  // default pattern
-
-if (argc > 1) {
-    shapeName = argv[1];  // use command-line argument if provided
-}
-
-// Check if the shape exists
-if (!data["shapes"].contains(shapeName)) {
-    cerr << "Error: shape '" << shapeName << "' not found. Using default 'glider'.\n";
-    shapeName = "glider";
-}
-
-auto shape = data["shapes"][shapeName];
+// Pick one pattern (change here if you like)
+    string shapeName = "glider";
+    auto shape = data["shapes"][shapeName];
     
     // Window setup
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
