@@ -16,7 +16,7 @@ If the window appears for 3 seconds without errors, your environment is ready fo
 
 | File | Description |
 |------|-------------|
-| **main.cpp** | Minimal SDL2 program that opens a window, fills it with a color, and waits 3 seconds. |
+| **main.cpp**(./main.cpp). | Minimal SDL2 program that opens a window, fills it with a color, and waits 3 seconds. |
 | **main_txt.cpp** | Optional alternate version used for text-rendering experiments. |
 | **Makefile** | Build script used to compile and run the program with `make` or `make run`. |
 | **DejaVuSans.ttf** | Font file for text rendering (not required for Program 00). |
