@@ -12,15 +12,15 @@ If the window appears for 3 seconds without errors, your environment is ready fo
 
 ---
 
-## File Overview
+## Files Included
 
 | File | Description |
 |------|-------------|
-| **main.cpp**(./main.cpp). | Minimal SDL2 program that opens a window, fills it with a color, and waits 3 seconds. |
-| **main_txt.cpp** | Optional alternate version used for text-rendering experiments. |
-| **Makefile** | Build script used to compile and run the program with `make` or `make run`. |
-| **DejaVuSans.ttf** | Font file for text rendering (not required for Program 00). |
-| **README.md** | Documentation for compiling and running this assignment. |
+| [`main.cpp`](https://github.com/NicoleVigilant/2143-OOP-vigilant/blob/main/Assignments/Program_00_Install_and_Compile/main.cpp) | Minimal SDL2 program that opens a window, clears screen, shows maroon background, and closes after 3 seconds. |
+| [`main_txt.cpp`](https://github.com/NicoleVigilant/2143-OOP-vigilant/blob/main/Assignments/Program_00_Install_and_Compile/main_txt.cpp) | Alternate version used for experimenting with text rendering (not required for Program 00). |
+| [`Makefile`](https://github.com/NicoleVigilant/2143-OOP-vigilant/blob/main/Assignments/Program_00_Install_and_Compile/Makefile) | Build script to compile the program using `make` and run it using `make run`. |
+| [`DejaVuSans.ttf`](https://github.com/NicoleVigilant/2143-OOP-vigilant/blob/main/Assignments/Program_00_Install_and_Compile/DejaVuSans.ttf) | Font file included for future text rendering (not needed for Program 00). |
+| [`README.md`](https://github.com/NicoleVigilant/2143-OOP-vigilant/blob/main/Assignments/Program_00_Install_and_Compile/README.md) | Documentation for Program 00 — installation, file descriptions, and how to run. |
 
 ---
 
