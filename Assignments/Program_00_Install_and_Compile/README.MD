@@ -39,7 +39,7 @@ Adjust if yours is different
 ### **4. Build and Run**
 make run
 
-# Expected Output
+### Expected Output
 
 A window titled "Game of Life — Program 00" appears with a maroon (or modified) background and closes after 3 seconds with no errors.
 
