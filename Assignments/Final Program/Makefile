@@ -1,32 +1,33 @@
-# ============================================
-# Name: Nicole Vigilant
-# Program 03 - SDL Game of Life
-# Makefile
-#
-# Description:
-#   Compiles the SDL version of Conway's
-#   Game of Life using all .cpp files in src/
-# ============================================
+# ============================================================
+# Makefile for SDL2 Game of Life
+# Author: Nicole Vigilant
+# Course: 2143 - OOP
+# Program 03
+# ============================================================
 
 # Compiler
 CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra
 
-# Compiler flags
-CXXFLAGS = -std=c++17 -Iincludes
-
-# SDL2 linking (MSYS2 / Linux / Codespaces)
-LDFLAGS = -lSDL2
+# Include directory
+INCLUDES = -IIncludes
 
 # Source and output
 SRC = src/SDL_GOL_main.cpp src/SdlScreen.cpp
-OUT = SDL_GOL_main
+TARGET = SDL_GOL_main
 
-# Default build
-all: $(OUT)
+# SDL2 Libraries (ORDER MATTERS)
+LIBS = -lSDL2main -lSDL2
 
-$(OUT): $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(OUT) $(LDFLAGS)
+# ============================================================
+# Default rule: build the executable
+# ============================================================
+$(TARGET): $(SRC)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(SRC) -o $(TARGET) $(LIBS)
 
-# Clean compiled files
+# ============================================================
+# Clean rule: remove executable
+# ============================================================
 clean:
-	rm -f $(OUT)
+	rm -f $(TARGET)
+
