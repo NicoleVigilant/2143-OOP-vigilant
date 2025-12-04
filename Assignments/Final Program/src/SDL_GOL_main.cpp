@@ -1,29 +1,26 @@
 /**
  * =========================================
  * Name: Nicole Vigilant
- * Date: Program 03
- * Assignment: SDL Game of Life
+ * Program 03 - SDL Game of Life
  * File: SDL_GOL_main.cpp
  *
  * Description:
- *    Main driver file for the SDL version of
- *    Conway's Game of Life. Supports:
- *      - Pause/Play (SPACE)
+ *    Main SDL driver for Conway’s Game of Life.
+ *    Supports:
+ *      - Pause (SPACE)
  *      - Step once (N)
- *      - Randomize (R)
  *      - Clear (C)
- *      - Quit (ESC or Q)
- *      - Toggle cells with mouse
- *      - Load "glider" with key 1
- *
- *    Uses ConwayLife logic from earlier programs
- *    and displays everything graphically using SDL.
+ *      - Randomize (R)
+ *      - Quit (Q or ESC)
+ *      - Mouse click toggles cells
+ *      - Load "glider" with key 1 at mouse position
  * =========================================
  */
 
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <fstream>
+
 #include "ArgsToJson.hpp"
 #include "json.hpp"
 #include "ConwayLife.hpp"
@@ -33,13 +30,15 @@ using json = nlohmann::json;
 
 int main(int argc, char* argv[]) {
 
-    // Default program settings (modifiable by args)
+    // --------------------------------------
+    // Default settings (can be overridden)
+    // --------------------------------------
     int windowWidth  = 800;
     int windowHeight = 800;
     int cellSize     = 10;
     int frameDelayMs = 50;
 
-    // Load command-line args if provided
+    // Try to read args like: window_width=900 cellSize=12
     try {
         json args = ArgsToJson(argc, argv);
         if (args.contains("window_width"))  windowWidth  = args["window_width"];
@@ -51,21 +50,25 @@ int main(int argc, char* argv[]) {
         std::cout << "Using default settings.\n";
     }
 
-    // Determine grid size
+    // Grid size based on pixel window size
     int rows = windowHeight / cellSize;
     int cols = windowWidth  / cellSize;
 
-    // Create automaton
+    // Create automaton model
     ConwayLife gol(rows, cols);
 
     // Create SDL screen
     SdlScreen screen(windowWidth, windowHeight, cellSize);
 
-    // Load shapes.json file
+    // --------------------------------------
+    // Load patterns JSON
+    // --------------------------------------
     json patterns;
     std::ifstream file("assets/shapes.json");
     if (file.is_open()) {
         patterns = json::parse(file);
+    } else {
+        std::cerr << "Error: Could not load shapes.json\n";
     }
 
     bool running = true;
@@ -74,9 +77,9 @@ int main(int argc, char* argv[]) {
 
     while (running) {
 
-        // ------------------------------
-        // HANDLE INPUT
-        // ------------------------------
+        // ----------------------------------
+        // HANDLE INPUT EVENTS
+        // ----------------------------------
         while (SDL_PollEvent(&event)) {
 
             if (event.type == SDL_QUIT)
@@ -95,20 +98,27 @@ int main(int argc, char* argv[]) {
                         break;
 
                     case SDLK_n:
-                        if (paused) gol.step();
+                        if (paused)
+                            gol.step();
                         break;
 
-                    case SDLK_r:
+                    case SDLK_r: { // Randomize
+                        auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
                         gol.randomize(0.25);
                         break;
+                    }
 
-                    case SDLK_c:
-                        for (auto& row : gol.getGrid())
-                            for (auto& cell : row)
-                                cell = 0;
+                    case SDLK_c: { // Clear
+                        auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
+                        for (int r = 0; r < rows; r++)
+                            for (int c = 0; c < cols; c++)
+                                grid[r][c] = 0;
                         break;
+                    }
 
-                    // Load glider at mouse position
+                    // --------------------------------------
+                    // LOAD "GLIDER" PATTERN AT MOUSE POSITION
+                    // --------------------------------------
                     case SDLK_1: {
                         int mx, my;
                         SDL_GetMouseState(&mx, &my);
@@ -116,41 +126,51 @@ int main(int argc, char* argv[]) {
                         int centerRow = my / cellSize;
                         int centerCol = mx / cellSize;
 
-                        if (patterns["shapes"].contains("glider")) {
+                        // Writable grid reference
+                        auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
+
+                        if (patterns.contains("shapes") &&
+                            patterns["shapes"].contains("glider")) {
+
                             for (auto& cell : patterns["shapes"]["glider"]["cells"]) {
-                                int r = centerRow + cell["y"];
-                                int c = centerCol + cell["x"];
+
+                                int r = centerRow + cell["y"].get<int>();
+                                int c = centerCol + cell["x"].get<int>();
 
                                 if (r >= 0 && r < rows &&
                                     c >= 0 && c < cols) {
-                                    gol.getGrid()[r][c] = 1;
+                                    grid[r][c] = 1;
                                 }
                             }
                         }
+                        break;
                     }
-                    break;
                 }
             }
 
-            // Mouse: toggle cell
+            // --------------------------------------
+            // MOUSE CLICK TO TOGGLE CELL
+            // --------------------------------------
             if (event.type == SDL_MOUSEBUTTONDOWN) {
                 int r, c;
-                if (screen.getCellFromMouse(event.button.x, event.button.y, r, c)) {
-                    auto& cell = const_cast<std::vector<std::vector<int>>&>(gol.getGrid())[r][c];
-                    cell = !cell;
+                if (screen.getCellFromMouse(event.button.x,
+                                            event.button.y, r, c)) {
+
+                    auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
+                    grid[r][c] = !grid[r][c];
                 }
             }
         }
 
-        // ------------------------------
-        // UPDATE
-        // ------------------------------
+        // ----------------------------------
+        // MODEL UPDATE
+        // ----------------------------------
         if (!paused)
             gol.step();
 
-        // ------------------------------
-        // RENDER
-        // ------------------------------
+        // ----------------------------------
+        // DRAW EVERYTHING
+        // ----------------------------------
         screen.render(gol.getGrid());
         screen.pause(frameDelayMs);
     }
