@@ -72,3 +72,17 @@ The result is a desktop-like, interactive Conway’s Game of Life application.
 | **1** | Load the *glider* pattern from `shapes.json` at mouse position |
 | **Left Mouse Click** | Toggle a cell on/off |
 | **ESC** or **Q** | Quit the program |
+
+## Screenshots
+
+### Paused Mode
+![Paused](images/paused.png)
+
+### Randomized Grid
+![Random](images/random.png)
+
+### Pattern Loaded (Glider)
+![Pattern Loaded](images/pattern_loaded.jpeg)
+
+### 200+ Generations
+![200 Generation Run](images/200generation_run.png)
