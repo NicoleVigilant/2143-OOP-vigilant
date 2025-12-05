@@ -10,23 +10,13 @@ The simulator draws a grid of cells inside an SDL2 window and updates the grid a
 
 The program supports full interaction, including:
 
-- SDL2 window + renderer  
+- SDL2 window and renderer  
 - Drawing cells using filled rectangles  
 - Clicking to toggle cells on/off  
 - Pausing and stepping the simulation  
 - Randomizing or clearing the grid  
 - Loading Life patterns from `shapes.json`  
 - Command-line configuration using JSON  
-
-This project demonstrates:
-
-- Object-Oriented Programming  
-- Event-driven programming  
-- JSON parsing (nlohmann/json)  
-- Rendering with SDL2  
-- Integrating simulation logic with a graphical UI  
-
-The result is a desktop-like, interactive Conway’s Game of Life application.
 
 ---
 
@@ -57,15 +47,15 @@ The result is a desktop-like, interactive Conway’s Game of Life application.
    pacman -S mingw-w64-x86_64-sdl2
 3. Naviagte into this program folder: cd 2143-OOP-vigilant/Assignments/Final\ Program
 4. Build the program: use make
-5. Run the program: ./SDL_GOL_main window_width=900 window_height=900 cellSize=12 frameDelayMs=60
-# 2. **Keyboard Controls Table**
+5. Run the program: ./SDL_GOL_main window_width=900 window_height=900 cellSize=12 frameDelayMs=60 or ./SDL_GOL_main
 
+# 2. **Keyboard Controls Table**
 
 ### Controls
 
 | Key | Action |
 |-----|--------|
-| **Space** | Pause / Resume simulation |
+| **Space** | Pause & Resume simulation |
 | **N** | Step forward 1 generation (pause required) |
 | **R** | Randomize the grid |
 | **C** | Clear the grid |
