@@ -30,15 +30,14 @@ using json = nlohmann::json;
 
 int main(int argc, char* argv[]) {
 
-    // --------------------------------------
+    
     // Default settings (can be overridden)
-    // --------------------------------------
     int windowWidth  = 800;
     int windowHeight = 800;
     int cellSize     = 10;
     int frameDelayMs = 50;
 
-    // Try to read args like: window_width=900 cellSize=12
+     // Attempt to read any JSON-style command-line arguments.
     try {
         json args = ArgsToJson(argc, argv);
         if (args.contains("window_width"))  windowWidth  = args["window_width"];
@@ -54,15 +53,14 @@ int main(int argc, char* argv[]) {
     int rows = windowHeight / cellSize;
     int cols = windowWidth  / cellSize;
 
-    // Create automaton model
+    // Create the ConwayLife model
     ConwayLife gol(rows, cols);
 
     // Create SDL screen
     SdlScreen screen(windowWidth, windowHeight, cellSize);
 
-    // --------------------------------------
-    // Load patterns JSON
-    // --------------------------------------
+    
+    // Load pattern definitions from JSON file
     json patterns;
     std::ifstream file("assets/shapes.json");
     if (file.is_open()) {
@@ -71,44 +69,52 @@ int main(int argc, char* argv[]) {
         std::cerr << "Error: Could not load shapes.json\n";
     }
 
-    bool running = true;
-    bool paused  = false;
-    SDL_Event event;
+     // MAIN EVENT LOOP STATE
+    bool running = true; // controls outer loop
+    bool paused  = false; // whether simulation is frozen
+    SDL_Event event; // stores incoming SDL events
 
+    // MAIN GAME LOOP
+    // Runs until user quits.
     while (running) {
 
-        // ----------------------------------
-        // HANDLE INPUT EVENTS
-        // ----------------------------------
+        
+        // HANDLE INPUT EVENTS FROM MOUSE AND KEYBOARD
         while (SDL_PollEvent(&event)) {
 
             if (event.type == SDL_QUIT)
                 running = false;
-
+            
+             // KEYBOARD HANDLING
             if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
 
+                    // Quit keys
                     case SDLK_q:
                     case SDLK_ESCAPE:
                         running = false;
                         break;
 
+                    // Pause or resume
                     case SDLK_SPACE:
                         paused = !paused;
                         break;
 
+                    // Step a single generation (only when paused)
                     case SDLK_n:
                         if (paused)
                             gol.step();
                         break;
 
-                    case SDLK_r: { // Randomize
+                       // Randomize grid
+                    case SDLK_r: {
                         auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
                         gol.randomize(0.25);
                         break;
                     }
 
-                    case SDLK_c: { // Clear
+                     // Clear grid (set all cells to 0)
+                    case SDLK_c: { 
                         auto& grid = const_cast<std::vector<std::vector<int>>&>(gol.getGrid());
                         for (int r = 0; r < rows; r++)
                             for (int c = 0; c < cols; c++)
@@ -116,9 +122,7 @@ int main(int argc, char* argv[]) {
                         break;
                     }
 
-                    // --------------------------------------
                     // LOAD "GLIDER" PATTERN AT MOUSE POSITION
-                    // --------------------------------------
                     case SDLK_1: {
                         int mx, my;
                         SDL_GetMouseState(&mx, &my);
@@ -148,9 +152,8 @@ int main(int argc, char* argv[]) {
                 }
             }
 
-            // --------------------------------------
+            
             // MOUSE CLICK TO TOGGLE CELL
-            // --------------------------------------
             if (event.type == SDL_MOUSEBUTTONDOWN) {
                 int r, c;
                 if (screen.getCellFromMouse(event.button.x,
@@ -162,15 +165,13 @@ int main(int argc, char* argv[]) {
             }
         }
 
-        // ----------------------------------
+        
         // MODEL UPDATE
-        // ----------------------------------
         if (!paused)
             gol.step();
 
-        // ----------------------------------
-        // DRAW EVERYTHING
-        // ----------------------------------
+        
+        // DRAW GRIDS AND CELLS
         screen.render(gol.getGrid());
         screen.pause(frameDelayMs);
     }
