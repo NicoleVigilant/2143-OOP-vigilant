@@ -82,7 +82,7 @@ void SdlScreen::render(const std::vector<std::vector<int>>& grid) {
         }
     }
 
-    // Draw grid lines (optional but helpful)
+    // Draw grid lines 
     SDL_SetRenderDrawColor(renderer, 70, 70, 80, 255);
 
     for (int x = 0; x < windowWidth; x += cellSize) {
