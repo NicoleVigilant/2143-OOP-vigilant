@@ -36,23 +36,23 @@ The result is a desktop-like, interactive Conway’s Game of Life application.
 |---|---------------|-------------|
 | 1 | [`src/SDL_GOL_main.cpp`](src/SDL_GOL_main.cpp) | Main driver program. Handles SDL loop, input, JSON loading, simulation logic. |
 | 2 | [`src/SdlScreen.cpp`](src/SdlScreen.cpp) | SDL2 renderer implementation. Draws grid and cells. |
-| 3 | [`includes/SdlScreen.hpp`](includes/SdlScreen.hpp) | Header for the SDL2 rendering class. |
-| 4 | [`includes/CellularAutomaton.hpp`](includes/CellularAutomaton.hpp) | Base automaton class that stores and updates the grid. |
-| 5 | [`includes/ConwayLife.hpp`](includes/ConwayLife.hpp) | Implements Conway’s Game of Life rules. |
+| 3 | [`includes/SdlScreen.hpp`](Includes/SdlScreen.hpp) | Header for the SDL2 rendering class. |
+| 4 | [`includes/CellularAutomaton.hpp`](Includes/CellularAutomaton.hpp) | Base automaton class that stores and updates the grid. |
+| 5 | [`includes/ConwayLife.hpp`](Includes/ConwayLife.hpp) | Implements Conway’s Game of Life rules. |
 | 6 | [`src/ConwayLife.cpp`](src/ConwayLife.cpp) | Step logic and grid update implementation. |
-| 7 | [`includes/Screen.hpp`](includes/Screen.hpp) | Abstract Screen interface for TextScreen and SdlScreen. |
-| 8 | [`includes/ArgsToJson.hpp`](includes/ArgsToJson.hpp) | Parses command-line arguments into a JSON object. |
-| 9 | [`includes/json.hpp`](includes/json.hpp) | nlohmann/json library. |
-|10 | [`assets/shapes.json`](assets/shapes.json) | Pattern definitions (glider, etc.). |
+| 7 | [`includes/Screen.hpp`](Includes/Screen.hpp) | Abstract Screen interface for TextScreen and SdlScreen. |
+| 8 | [`includes/ArgsToJson.hpp`](Includes/ArgsToJson.hpp) | Parses command line arguments into a JSON object. |
+| 9 | [`includes/json.hpp`](Includes/json.hpp) | nlohmann/json library. |
+|10 | [`assets/shapes.json`](Assets/shapes.json) | Pattern definitions. |
 |11 | [`Makefile`](Makefile) | Automates the build process. |
-|12 | `README.md` | Project documentation (this file). |
+|12 | `README.md` | Project documentation. |
 
 ---
 
 ### Instructions
 
 1. Open **MSYS2 MinGW 64-bit** terminal.
-2. Install SDL2 (only needed once):
+2. Install SDL2:
    ```bash
    pacman -S mingw-w64-x86_64-sdl2
 3. Naviagte into this program folder: cd 2143-OOP-vigilant/Assignments/Final\ Program
@@ -76,13 +76,13 @@ The result is a desktop-like, interactive Conway’s Game of Life application.
 ## Screenshots
 
 ### Paused Mode
-![Paused](images/paused.png)
+![Paused](Images/paused.png)
 
 ### Randomized Grid
-![Random](images/random.png)
+![Random](Images/random.png)
 
 ### Pattern Loaded (Glider)
-![Pattern Loaded](images/pattern_loaded.jpeg)
+![Pattern Loaded](Images/pattern_loaded.jpeg)
 
 ### 200+ Generations
-![200 Generation Run](images/200generation_run.png)
+![200 Generation Run](Images/200generation_run.png)
