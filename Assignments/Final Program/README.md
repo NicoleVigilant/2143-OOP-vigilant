@@ -49,9 +49,7 @@ The program supports full interaction, including:
 4. Build the program: use make
 5. Run the program: ./SDL_GOL_main window_width=900 window_height=900 cellSize=12 frameDelayMs=60 or ./SDL_GOL_main
 
-# 2. **Keyboard Controls Table**
-
-### Controls
+## **Keyboard Controls Table**
 
 | Key | Action |
 |-----|--------|
@@ -66,13 +64,14 @@ The program supports full interaction, including:
 ## Screenshots
 
 ### Paused Mode
-![Paused](Images/paused.png)
+<img src="Images/paused.png" width="350">
 
 ### Randomized Grid
-![Random](Images/random.png)
+<img src="Images/random.png" width="350">
 
 ### Pattern Loaded (Glider)
-![Pattern Loaded](Images/pattern_loaded.jpeg)
+<img src="Images/pattern_loaded.jpeg" width="350">
 
 ### 200+ Generations
-![200 Generation Run](Images/200generation_run.png)
+<img src="Images/200generation_run.png" width="350">
+
