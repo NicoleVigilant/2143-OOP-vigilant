@@ -69,6 +69,6 @@ The result is a desktop-like, interactive Conway’s Game of Life application.
 | **N** | Step forward 1 generation (pause required) |
 | **R** | Randomize the grid |
 | **C** | Clear the grid |
-| **G** | Load the *glider* pattern from `shapes.json` at mouse position |
+| **1** | Load the *glider* pattern from `shapes.json` at mouse position |
 | **Left Mouse Click** | Toggle a cell on/off |
 | **ESC** or **Q** | Quit the program |
